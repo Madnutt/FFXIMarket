@@ -20,6 +20,8 @@ function Search(): JSX.Element {
         setSearchInput(string);
     }, 1200);
 
+    // TODO: Ujednolicić listy wyszukiwania bo jest duż opowtarzalnych elementów
+
     return (
         <>
             <SearchInput

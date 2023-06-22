@@ -23,6 +23,12 @@ function ItemList({ searchString }: Props): JSX.Element {
     const styleContext = useContext(StyleContext);
     const [searching, setSearching] = useState(false);
 
+    const foundResults =
+        results && results.length > 0 && !searching && searchString;
+
+    const noResults =
+        results && results.length === 0 && !searching && searchString;
+
     useEffect(() => {
         (async () => {
             if (searchString.length > 0) {
@@ -45,9 +51,7 @@ function ItemList({ searchString }: Props): JSX.Element {
                 paddingVertical: 20,
             }}
         >
-            {results &&
-                !searching &&
-                searchString &&
+            {foundResults &&
                 results.map((result, index) => {
                     return (
                         <View key={'result-' + index}>
@@ -110,6 +114,21 @@ function ItemList({ searchString }: Props): JSX.Element {
                         </View>
                     );
                 })}
+
+            {noResults && (
+                <Text
+                    style={{
+                        textAlign: 'center',
+                        textAlignVertical: 'center',
+                        height: '100%',
+                        fontSize: 20,
+                        marginTop: -20,
+                        color: styleContext.colors.compliment,
+                    }}
+                >
+                    No results found
+                </Text>
+            )}
 
             {searching && <ItemSearchLoading />}
 
