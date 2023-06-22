@@ -18,7 +18,6 @@ function Character({ navigation }: Props): JSX.Element {
         <>
             <CharacterTitleLoader />
             <View style={{ position: 'relative' }}>
-                {/* TODO: skończyć później */}
                 <Image
                     source={{
                         uri: 'https://img2.finalfantasyxiv.com/f/0d04044e35f77172e501a3b7ea34e310_feaf0a2e88ff164813fbc9b85876fa48fl0_640x873.jpg?1687361326',

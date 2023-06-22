@@ -4,13 +4,19 @@ import { StyleContext } from './StyleContext';
 import { Picker } from '@react-native-picker/picker';
 import SpyGlassIcon from './Svg/SpyGlassIcon';
 import { SearchTypes } from './Screens/Search';
+import type { DebouncedState } from 'use-debounce';
 
 interface Props {
     typeState: SearchTypes;
     typeSetState: React.Dispatch<React.SetStateAction<SearchTypes>>;
+    setSearchInput: DebouncedState<(string: string) => void>;
 }
 
-function SearchInput({ typeState, typeSetState }: Props): JSX.Element {
+function SearchInput({
+    typeState,
+    typeSetState,
+    setSearchInput,
+}: Props): JSX.Element {
     const styleContext = useContext(StyleContext);
 
     return (
@@ -24,6 +30,9 @@ function SearchInput({ typeState, typeSetState }: Props): JSX.Element {
                     paddingRight: 150,
                 }}
                 placeholder="Label"
+                onChangeText={(value) => {
+                    setSearchInput(value);
+                }}
             />
             <View style={{ position: 'absolute', top: 13, left: 13 }}>
                 <SpyGlassIcon />
