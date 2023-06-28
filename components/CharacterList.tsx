@@ -1,14 +1,14 @@
 import { useContext, useEffect, useState } from 'react';
-import { Image, Text, View } from 'react-native';
-import { StyleContext } from './StyleContext';
-import ListItemLoader from './Loaders/ListItemLoader';
-import CharacterTitleLoader from './Loaders/CharacterTitleLoader';
+import { Image, Pressable, Text, View } from 'react-native';
+import { ScreenStackList, StyleContext } from './StyleContext';
 import { searchCharacter } from '../utils/ffxivapiData';
-import CharacterSearchLoading from './CharacterList/CharacterSearchLoading';
+import CharacterSearchLoading from './Character/CharacterSearchLoading';
 import Divider from './Divider';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 interface Props {
     searchString: string;
+    navigation: NativeStackNavigationProp<ScreenStackList, 'Search'>;
 }
 
 interface FfxivApiResponse {
@@ -18,7 +18,7 @@ interface FfxivApiResponse {
     Server: string;
 }
 
-function CharacterList({ searchString }: Props): JSX.Element {
+function CharacterList({ searchString, navigation }: Props): JSX.Element {
     const [results, setResult] = useState<FfxivApiResponse[]>();
     const styleContext = useContext(StyleContext);
     const [searching, setSearching] = useState(false);
@@ -55,10 +55,15 @@ function CharacterList({ searchString }: Props): JSX.Element {
                 results.map((result, index) => {
                     return (
                         <View key={'result-' + index}>
-                            <View
+                            <Pressable
                                 style={{
                                     display: 'flex',
                                     flexDirection: 'row',
+                                }}
+                                onPress={() => {
+                                    navigation.navigate('Character', {
+                                        characterId: result.ID,
+                                    });
                                 }}
                             >
                                 <View
@@ -95,7 +100,7 @@ function CharacterList({ searchString }: Props): JSX.Element {
                                         {result.Server}
                                     </Text>
                                 </View>
-                            </View>
+                            </Pressable>
                             {index < results.length - 1 && <Divider />}
                         </View>
                     );

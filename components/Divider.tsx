@@ -9,7 +9,7 @@ function Divider(): JSX.Element {
             style={{
                 height: 1,
                 marginHorizontal: 15,
-                marginVertical: 10,
+                marginVertical: 20,
                 backgroundColor: styleContext.colors.complimentAccent,
             }}
         />

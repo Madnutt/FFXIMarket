@@ -7,7 +7,7 @@ export enum Screen {
 }
 
 export type ScreenStackList = {
-    Character: undefined;
+    Character: { characterId: number };
     Search: undefined;
     Favourites: undefined;
 };

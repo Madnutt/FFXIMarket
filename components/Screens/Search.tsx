@@ -12,7 +12,9 @@ export enum SearchTypes {
     ITEM = 'item',
 }
 
-function Search(): JSX.Element {
+type Props = NativeStackScreenProps<ScreenStackList, 'Search'>;
+
+function Search({ navigation }: Props): JSX.Element {
     const [searchType, setSearchType] = useState(SearchTypes.CHARACTER);
     const [searchInput, setSearchInput] = useState('');
 
@@ -33,7 +35,10 @@ function Search(): JSX.Element {
                 <ItemList searchString={searchInput} />
             )}
             {searchType === SearchTypes.CHARACTER && (
-                <CharacterList searchString={searchInput} />
+                <CharacterList
+                    searchString={searchInput}
+                    navigation={navigation}
+                />
             )}
         </>
     );

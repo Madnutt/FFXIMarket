@@ -8,8 +8,8 @@ function ListItemLoader(): JSX.Element {
         <ContentLoader
             speed={1.2}
             width={321}
-            height={89}
-            viewBox="0 0 321 89"
+            height={66}
+            viewBox="0 0 321 66"
             backgroundColor={styleContext.colors.secondaryAccent}
             foregroundColor={styleContext.colors.secondary}
         >

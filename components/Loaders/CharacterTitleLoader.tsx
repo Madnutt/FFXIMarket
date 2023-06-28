@@ -8,8 +8,8 @@ function CharacterTitleLoader(): JSX.Element {
         <ContentLoader
             speed={1.2}
             width={280}
-            height={80}
-            viewBox="0 0 280 80"
+            height={70}
+            viewBox="0 0 280 70"
             backgroundColor={styleContext.colors.secondaryAccent}
             foregroundColor={styleContext.colors.secondary}
         >
