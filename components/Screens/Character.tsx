@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native';
+import { ScrollView, Text } from 'react-native';
 import CharacterView from '../Character/CharacterView';
 import { useContext } from 'react';
 import { ScreenStackList, StyleContext } from '../StyleContext';
@@ -25,7 +25,11 @@ function Character({ route }: Props): JSX.Element {
             </Text>
         );
     } else {
-        return <CharacterView characterId={route.params.characterId} />;
+        return (
+            <ScrollView>
+                <CharacterView characterId={route.params.characterId} />
+            </ScrollView>
+        );
     }
 }
 

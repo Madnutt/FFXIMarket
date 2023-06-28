@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ColorValue, ProcessedColorValue, processColor } from 'react-native';
+import { processColor } from 'react-native';
 import { LineChart } from 'react-native-charts-wrapper';
 import {
     DividedItems,

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { Image, Text, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import { StyleContext } from './StyleContext';
 import Divider from './Divider';
 import ItemSearchLoading from './ItemList/ItemSearchLoading';
@@ -47,26 +47,29 @@ function ItemList({ searchString }: Props): JSX.Element {
         <View
             style={{
                 paddingHorizontal: 16,
-                paddingVertical: 20,
+                paddingTop: 20,
+                paddingBottom: 80,
             }}
         >
-            {foundResults &&
-                results.map((result, index) => {
-                    return (
-                        <View key={'result-' + index}>
-                            <SingleItemResult
-                                iconUrl={
-                                    'https://xivapi.com' +
-                                    decodeURIComponent(result.Icon)
-                                }
-                                name={result.Name}
-                                IconElement={<HeartIcon />}
-                            />
-                            {index < results.length - 1 && <Divider />}
-                        </View>
-                    );
-                })}
-
+            {foundResults && (
+                <ScrollView>
+                    {results.map((result, index) => {
+                        return (
+                            <View key={'result-' + index}>
+                                <SingleItemResult
+                                    iconUrl={
+                                        'https://xivapi.com' +
+                                        decodeURIComponent(result.Icon)
+                                    }
+                                    name={result.Name}
+                                    IconElement={<HeartIcon />}
+                                />
+                                {index < results.length - 1 && <Divider />}
+                            </View>
+                        );
+                    })}
+                </ScrollView>
+            )}
             {noResults && (
                 <Text
                     style={{

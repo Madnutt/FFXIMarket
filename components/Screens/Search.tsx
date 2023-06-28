@@ -3,7 +3,6 @@ import { ScreenStackList } from '../StyleContext';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import SearchInput from '../SearchInput';
 import ItemList from '../ItemList';
-import { Text } from 'react-native';
 import CharacterList from '../CharacterList';
 import { useDebouncedCallback } from 'use-debounce';
 

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { Image, Pressable, Text, View } from 'react-native';
+import { Image, Pressable, ScrollView, Text, View } from 'react-native';
 import { ScreenStackList, StyleContext } from './StyleContext';
 import { searchCharacter } from '../utils/ffxivapiData';
 import CharacterSearchLoading from './Character/CharacterSearchLoading';
@@ -48,64 +48,69 @@ function CharacterList({ searchString, navigation }: Props): JSX.Element {
         <View
             style={{
                 paddingHorizontal: 16,
-                paddingVertical: 20,
+                paddingTop: 20,
+                paddingBottom: 80,
             }}
         >
-            {foundResults &&
-                results.map((result, index) => {
-                    return (
-                        <View key={'result-' + index}>
-                            <Pressable
-                                style={{
-                                    display: 'flex',
-                                    flexDirection: 'row',
-                                }}
-                                onPress={() => {
-                                    navigation.navigate('Character', {
-                                        characterId: result.ID,
-                                    });
-                                }}
-                            >
-                                <View
+            {foundResults && (
+                <ScrollView>
+                    {results.map((result, index) => {
+                        return (
+                            <View key={'result-' + index}>
+                                <Pressable
                                     style={{
-                                        padding: 5,
-                                        borderRadius: 4,
+                                        display: 'flex',
+                                        flexDirection: 'row',
+                                    }}
+                                    onPress={() => {
+                                        navigation.navigate('Character', {
+                                            characterId: result.ID,
+                                        });
                                     }}
                                 >
-                                    <Image
-                                        style={{ width: 70, height: 70 }}
-                                        source={{ uri: result.Avatar }}
-                                    />
-                                </View>
-                                <View style={{ marginLeft: 20, marginTop: 6 }}>
-                                    <Text
+                                    <View
                                         style={{
-                                            fontSize: 16,
-                                            lineHeight: 24,
-                                            color: styleContext.colors
-                                                .compliment,
-                                            marginBottom: 10,
+                                            padding: 5,
+                                            borderRadius: 4,
                                         }}
                                     >
-                                        {result.Name}
-                                    </Text>
-                                    <Text
-                                        style={{
-                                            fontSize: 16,
-                                            lineHeight: 24,
-                                            color: styleContext.colors
-                                                .compliment,
-                                        }}
+                                        <Image
+                                            style={{ width: 70, height: 70 }}
+                                            source={{ uri: result.Avatar }}
+                                        />
+                                    </View>
+                                    <View
+                                        style={{ marginLeft: 20, marginTop: 6 }}
                                     >
-                                        {result.Server}
-                                    </Text>
-                                </View>
-                            </Pressable>
-                            {index < results.length - 1 && <Divider />}
-                        </View>
-                    );
-                })}
-
+                                        <Text
+                                            style={{
+                                                fontSize: 16,
+                                                lineHeight: 24,
+                                                color: styleContext.colors
+                                                    .compliment,
+                                                marginBottom: 10,
+                                            }}
+                                        >
+                                            {result.Name}
+                                        </Text>
+                                        <Text
+                                            style={{
+                                                fontSize: 16,
+                                                lineHeight: 24,
+                                                color: styleContext.colors
+                                                    .compliment,
+                                            }}
+                                        >
+                                            {result.Server}
+                                        </Text>
+                                    </View>
+                                </Pressable>
+                                {index < results.length - 1 && <Divider />}
+                            </View>
+                        );
+                    })}
+                </ScrollView>
+            )}
             {noResults && (
                 <Text
                     style={{

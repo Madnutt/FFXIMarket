@@ -28,8 +28,10 @@ function SearchInput({
                     textAlignVertical: 'center',
                     paddingLeft: 56,
                     paddingRight: 150,
+                    color: styleContext.colors.secondary,
                 }}
                 placeholder="Label"
+                placeholderTextColor={styleContext.colors.secondaryAccent}
                 onChangeText={(value) => {
                     setSearchInput(value);
                 }}
@@ -54,11 +56,13 @@ function SearchInput({
                     }}
                     style={{
                         marginTop: -1,
+                        color: styleContext.colors.secondary,
                     }}
                     selectedValue={typeState}
                     onValueChange={(itemValue) => {
                         typeSetState(itemValue);
                     }}
+                    dropdownIconColor={styleContext.colors.secondary}
                 >
                     <Picker.Item
                         style={{ fontSize: 14 }}

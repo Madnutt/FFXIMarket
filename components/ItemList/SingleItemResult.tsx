@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import { Image, Text, View } from 'react-native';
 import { StyleContext } from '../StyleContext';
-import HeartIcon from '../Svg/HeartIcon';
 
 interface Props {
     iconUrl: string;
