@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ScreenStackList } from '../StyleContext';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import SearchInput from '../SearchInput';
 import ItemList from '../ItemList';
 import CharacterList from '../CharacterList';
 import { useDebouncedCallback } from 'use-debounce';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import useFavourites from '../../hooks/useFavourites';
 
 export enum SearchTypes {
     CHARACTER = 'character',

@@ -19,7 +19,7 @@ function FavouriteItem({ iconUrl, name, itemId }: Props): JSX.Element {
                 <SingleItemResult
                     name={name}
                     iconUrl={iconUrl}
-                    IconElement={<TrashIcon />}
+                    IconElement={TrashIcon}
                 />
             </Pressable>
             <View style={{ height: visible ? 300 : 0, overflow: 'hidden' }}>

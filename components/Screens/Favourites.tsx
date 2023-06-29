@@ -3,17 +3,18 @@ import { ScrollView, View } from 'react-native';
 import ItemSearchLoading from '../ItemList/ItemSearchLoading';
 import { ItemData, getItemsData } from '../../utils/ffxivapiData';
 import FavouriteItem from '../ItemList/FavouriteItem';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import useFavourites from '../../hooks/useFavourites';
 
 function Favourites(): JSX.Element {
     const [result, setResult] = useState<ItemData[]>();
+    const [favourites] = useFavourites();
 
+    // TODO: zarządzać ulubionymi na wyższym poziomie żeby nie duplikowac kodu
     useEffect(() => {
-        //TODO: wziąć te idki z jakiegoś storaga po zapisaniu z wyszukiwania
-        const favouriteIds = [27162, 27204, 27202];
-
         (async () => {
-            if (favouriteIds.length > 0) {
-                const response = await getItemsData(favouriteIds);
+            if (favourites.length > 0) {
+                const response = await getItemsData(favourites);
                 if (response.ok) {
                     setResult((await response.json()).Results as ItemData[]);
                 } else {
@@ -21,7 +22,7 @@ function Favourites(): JSX.Element {
                 }
             }
         })();
-    }, []);
+    }, [favourites]);
     return (
         <View
             style={{
@@ -42,7 +43,7 @@ function Favourites(): JSX.Element {
                                     decodeURIComponent(value.Icon)
                                 }
                                 itemId={value.ID}
-                                key={i}
+                                key={value.ID}
                             />
                         );
                     })}

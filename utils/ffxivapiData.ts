@@ -43,7 +43,7 @@ export async function searchCharacter(search: string, server = 'Spriggan') {
     return await fetch(
         'https://xivapi.com/character/search?' +
             new URLSearchParams({
-                name: encodeURIComponent(search),
+                name: search,
                 limit: '20',
                 server,
             })
@@ -54,7 +54,7 @@ export async function searchItem(search: string) {
     return await fetch(
         'https://xivapi.com/search?' +
             new URLSearchParams({
-                string: encodeURIComponent(search),
+                string: search,
                 limit: '20',
                 indexes: 'Item',
             })

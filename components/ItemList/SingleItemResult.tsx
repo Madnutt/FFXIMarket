@@ -1,14 +1,23 @@
-import { useContext } from 'react';
-import { Image, Text, View } from 'react-native';
+import { FunctionComponent, useContext, useEffect, useState } from 'react';
+import { Image, Pressable, Text, View } from 'react-native';
 import { StyleContext } from '../StyleContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface Props {
     iconUrl: string;
     name: string;
-    IconElement: JSX.Element | undefined;
+    iconColor?: string;
+    IconElement?: FunctionComponent<{ color?: string }>;
+    iconCallback?: CallableFunction;
 }
 
-function SingleItemResult({ iconUrl, name, IconElement }: Props): JSX.Element {
+function SingleItemResult({
+    iconUrl,
+    name,
+    IconElement,
+    iconColor,
+    iconCallback,
+}: Props): JSX.Element {
     const styleContext = useContext(StyleContext);
 
     return (
@@ -61,7 +70,17 @@ function SingleItemResult({ iconUrl, name, IconElement }: Props): JSX.Element {
                     right: 12,
                 }}
             >
-                {IconElement !== undefined && IconElement}
+                <Pressable
+                    onPress={() => {
+                        if (iconCallback !== undefined) {
+                            iconCallback();
+                        }
+                    }}
+                >
+                    {IconElement !== undefined && (
+                        <IconElement color={iconColor} />
+                    )}
+                </Pressable>
             </View>
         </View>
     );

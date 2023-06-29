@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { StyleContext } from './StyleContext';
 import Divider from './Divider';
@@ -6,6 +6,8 @@ import ItemSearchLoading from './ItemList/ItemSearchLoading';
 import { searchItem } from '../utils/ffxivapiData';
 import HeartIcon from './Svg/HeartIcon';
 import SingleItemResult from './ItemList/SingleItemResult';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import useFavourites from '../hooks/useFavourites';
 
 interface Props {
     searchString: string;
@@ -21,6 +23,7 @@ function ItemList({ searchString }: Props): JSX.Element {
     const [results, setResult] = useState<FfxivApiResponse[]>();
     const styleContext = useContext(StyleContext);
     const [searching, setSearching] = useState(false);
+    const [favourites, setFavourite] = useFavourites();
 
     const foundResults =
         results && results.length > 0 && !searching && searchString;
@@ -41,7 +44,7 @@ function ItemList({ searchString }: Props): JSX.Element {
                 setSearching(false);
             }
         })();
-    }, [searchString]);
+    }, [searchString, favourites]);
 
     return (
         <View
@@ -54,15 +57,29 @@ function ItemList({ searchString }: Props): JSX.Element {
             {foundResults && (
                 <ScrollView>
                     {results.map((result, index) => {
+                        const isFavourite =
+                            favourites.findIndex((value) => {
+                                return value === result.ID;
+                            }) !== -1;
+
+                        console.log(result.Name);
+                        console.log(isFavourite);
+                        console.log();
+
                         return (
-                            <View key={'result-' + index}>
+                            <View key={result.ID}>
                                 <SingleItemResult
+                                    key={'resultContent-' + index}
                                     iconUrl={
                                         'https://xivapi.com' +
                                         decodeURIComponent(result.Icon)
                                     }
                                     name={result.Name}
-                                    IconElement={<HeartIcon />}
+                                    IconElement={HeartIcon}
+                                    iconColor={isFavourite ? '#F00' : undefined}
+                                    iconCallback={() => {
+                                        setFavourite(result.ID);
+                                    }}
                                 />
                                 {index < results.length - 1 && <Divider />}
                             </View>
