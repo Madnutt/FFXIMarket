@@ -1,15 +1,17 @@
 import { ScrollView, Text } from 'react-native';
 import CharacterView from '../Character/CharacterView';
 import { useContext } from 'react';
-import { ScreenStackList, StyleContext } from '../StyleContext';
+import { ScreenStackList, StyleContext } from '../Context/StyleContext';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import AppDataContext from '../Context/FavouritesContext';
 
 type Props = NativeStackScreenProps<ScreenStackList, 'Character'>;
 
 function Character({ route }: Props): JSX.Element {
     const styleContext = useContext(StyleContext);
+    const { characterId } = useContext(AppDataContext);
 
-    if (route.params === undefined) {
+    if (route.params === undefined && characterId === -1) {
         return (
             <Text
                 style={{
@@ -27,7 +29,11 @@ function Character({ route }: Props): JSX.Element {
     } else {
         return (
             <ScrollView>
-                <CharacterView characterId={route.params.characterId} />
+                <CharacterView
+                    characterId={
+                        route.params ? route.params.characterId : characterId
+                    }
+                />
             </ScrollView>
         );
     }

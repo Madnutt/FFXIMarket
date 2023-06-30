@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { TextInput, View } from 'react-native';
-import { StyleContext } from './StyleContext';
+import { StyleContext } from './Context/StyleContext';
 import { Picker } from '@react-native-picker/picker';
 import SpyGlassIcon from './Svg/SpyGlassIcon';
 import { SearchTypes } from './Screens/Search';
@@ -30,7 +30,7 @@ function SearchInput({
                     paddingRight: 150,
                     color: styleContext.colors.secondary,
                 }}
-                placeholder="Label"
+                placeholder="Search"
                 placeholderTextColor={styleContext.colors.secondaryAccent}
                 onChangeText={(value) => {
                     setSearchInput(value);

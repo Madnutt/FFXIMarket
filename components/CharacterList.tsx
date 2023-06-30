@@ -1,10 +1,11 @@
 import { useContext, useEffect, useState } from 'react';
 import { Image, Pressable, ScrollView, Text, View } from 'react-native';
-import { ScreenStackList, StyleContext } from './StyleContext';
+import { ScreenStackList, StyleContext } from './Context/StyleContext';
 import { searchCharacter } from '../utils/ffxivapiData';
 import CharacterSearchLoading from './Character/CharacterSearchLoading';
 import Divider from './Divider';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import AppDataContext from './Context/FavouritesContext';
 
 interface Props {
     searchString: string;
@@ -22,6 +23,7 @@ function CharacterList({ searchString, navigation }: Props): JSX.Element {
     const [results, setResult] = useState<FfxivApiResponse[]>();
     const styleContext = useContext(StyleContext);
     const [searching, setSearching] = useState(false);
+    const { setCharacterId } = useContext(AppDataContext);
 
     const foundResults =
         results && results.length > 0 && !searching && searchString;
@@ -62,10 +64,11 @@ function CharacterList({ searchString, navigation }: Props): JSX.Element {
                                         display: 'flex',
                                         flexDirection: 'row',
                                     }}
-                                    onPress={() => {
+                                    onPress={async () => {
                                         navigation.navigate('Character', {
                                             characterId: result.ID,
                                         });
+                                        setCharacterId(result.ID);
                                     }}
                                 >
                                     <View

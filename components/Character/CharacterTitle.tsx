@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { Image, Text, View } from 'react-native';
-import { StyleContext } from '../StyleContext';
+import { StyleContext } from '../Context/StyleContext';
 
 interface Props {
     name: string;

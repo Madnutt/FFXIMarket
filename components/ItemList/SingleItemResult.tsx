@@ -1,7 +1,6 @@
-import { FunctionComponent, useContext, useEffect, useState } from 'react';
+import { FunctionComponent, useContext } from 'react';
 import { Image, Pressable, Text, View } from 'react-native';
-import { StyleContext } from '../StyleContext';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { StyleContext } from '../Context/StyleContext';
 
 interface Props {
     iconUrl: string;

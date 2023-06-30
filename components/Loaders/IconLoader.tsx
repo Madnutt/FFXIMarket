@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import ContentLoader, { Rect } from 'react-content-loader/native';
-import { StyleContext } from '../StyleContext';
+import { StyleContext } from '../Context/StyleContext';
 
 function IconLoader(): JSX.Element {
     const styleContext = useContext(StyleContext);

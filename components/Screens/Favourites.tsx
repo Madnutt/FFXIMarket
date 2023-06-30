@@ -1,16 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import ItemSearchLoading from '../ItemList/ItemSearchLoading';
 import { ItemData, getItemsData } from '../../utils/ffxivapiData';
 import FavouriteItem from '../ItemList/FavouriteItem';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import useFavourites from '../../hooks/useFavourites';
+import AppDataContext from '../Context/FavouritesContext';
 
 function Favourites(): JSX.Element {
     const [result, setResult] = useState<ItemData[]>();
-    const [favourites] = useFavourites();
+    const { favourites } = useContext(AppDataContext);
 
-    // TODO: zarządzać ulubionymi na wyższym poziomie żeby nie duplikowac kodu
     useEffect(() => {
         (async () => {
             if (favourites.length > 0) {
@@ -34,7 +32,7 @@ function Favourites(): JSX.Element {
             <ScrollView>
                 {!result && <ItemSearchLoading />}
                 {result &&
-                    result.map((value, i) => {
+                    result.map((value) => {
                         return (
                             <FavouriteItem
                                 name={value.Name}

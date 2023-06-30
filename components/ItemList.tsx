@@ -1,13 +1,12 @@
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
-import { StyleContext } from './StyleContext';
+import { StyleContext } from './Context/StyleContext';
 import Divider from './Divider';
 import ItemSearchLoading from './ItemList/ItemSearchLoading';
 import { searchItem } from '../utils/ffxivapiData';
 import HeartIcon from './Svg/HeartIcon';
 import SingleItemResult from './ItemList/SingleItemResult';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import useFavourites from '../hooks/useFavourites';
+import AppDataContext from './Context/FavouritesContext';
 
 interface Props {
     searchString: string;
@@ -23,7 +22,7 @@ function ItemList({ searchString }: Props): JSX.Element {
     const [results, setResult] = useState<FfxivApiResponse[]>();
     const styleContext = useContext(StyleContext);
     const [searching, setSearching] = useState(false);
-    const [favourites, setFavourite] = useFavourites();
+    const { favourites, setFavourite } = useContext(AppDataContext);
 
     const foundResults =
         results && results.length > 0 && !searching && searchString;
@@ -44,7 +43,7 @@ function ItemList({ searchString }: Props): JSX.Element {
                 setSearching(false);
             }
         })();
-    }, [searchString, favourites]);
+    }, [searchString]);
 
     return (
         <View
@@ -62,10 +61,6 @@ function ItemList({ searchString }: Props): JSX.Element {
                                 return value === result.ID;
                             }) !== -1;
 
-                        console.log(result.Name);
-                        console.log(isFavourite);
-                        console.log();
-
                         return (
                             <View key={result.ID}>
                                 <SingleItemResult
@@ -77,9 +72,7 @@ function ItemList({ searchString }: Props): JSX.Element {
                                     name={result.Name}
                                     IconElement={HeartIcon}
                                     iconColor={isFavourite ? '#F00' : undefined}
-                                    iconCallback={() => {
-                                        setFavourite(result.ID);
-                                    }}
+                                    iconCallback={() => setFavourite(result.ID)}
                                 />
                                 {index < results.length - 1 && <Divider />}
                             </View>
