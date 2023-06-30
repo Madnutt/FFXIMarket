@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ScreenStackList } from '../Context/StyleContext';
+import { ScreenStackList } from '../../context/StyleContext';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import SearchInput from '../SearchInput';
 import ItemList from '../ItemList';

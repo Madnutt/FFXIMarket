@@ -1,13 +1,17 @@
 import { useContext, useEffect, useState } from 'react';
-import { ScrollView, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import ItemSearchLoading from '../ItemList/ItemSearchLoading';
 import { ItemData, getItemsData } from '../../utils/ffxivapiData';
 import FavouriteItem from '../ItemList/FavouriteItem';
-import AppDataContext from '../Context/FavouritesContext';
+import AppDataContext from '../../context/AppDataContext';
+import { StyleContext } from '../../context/StyleContext';
 
 function Favourites(): JSX.Element {
     const [result, setResult] = useState<ItemData[]>();
     const { favourites } = useContext(AppDataContext);
+    const styleContext = useContext(StyleContext);
+
+    console.log(favourites.length);
 
     useEffect(() => {
         (async () => {
@@ -29,10 +33,23 @@ function Favourites(): JSX.Element {
                 paddingBottom: 80,
             }}
         >
-            <ScrollView>
-                {!result && <ItemSearchLoading />}
-                {result &&
-                    result.map((value) => {
+            {favourites.length === 0 && (
+                <Text
+                    style={{
+                        textAlign: 'center',
+                        textAlignVertical: 'center',
+                        height: '100%',
+                        fontSize: 20,
+                        color: styleContext.colors.compliment,
+                    }}
+                >
+                    Add some items to favourites first
+                </Text>
+            )}
+            {!result && favourites.length > 0 && <ItemSearchLoading />}
+            {result && (
+                <ScrollView>
+                    {result.map((value) => {
                         return (
                             <FavouriteItem
                                 name={value.Name}
@@ -45,7 +62,8 @@ function Favourites(): JSX.Element {
                             />
                         );
                     })}
-            </ScrollView>
+                </ScrollView>
+            )}
         </View>
     );
 }

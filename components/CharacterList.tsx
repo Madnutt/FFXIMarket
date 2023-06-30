@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from 'react';
 import { Image, Pressable, ScrollView, Text, View } from 'react-native';
-import { ScreenStackList, StyleContext } from './Context/StyleContext';
+import { ScreenStackList, StyleContext } from '../context/StyleContext';
 import { searchCharacter } from '../utils/ffxivapiData';
 import CharacterSearchLoading from './Character/CharacterSearchLoading';
 import Divider from './Divider';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import AppDataContext from './Context/FavouritesContext';
+import AppDataContext from '../context/AppDataContext';
 
 interface Props {
     searchString: string;

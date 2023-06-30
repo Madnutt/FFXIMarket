@@ -8,10 +8,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import React, { useContext, useEffect, useState } from 'react';
 import Search from './components/Screens/Search';
-import {
-    StyleContext,
-    ScreenStackList,
-} from './components/Context/StyleContext';
+import { StyleContext, ScreenStackList } from './context/StyleContext';
 import Favourites from './components/Screens/Favourites';
 import Character from './components/Screens/Character';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -20,7 +17,7 @@ import SpyGlassIcon from './components/Svg/SpyGlassIcon';
 import HeartIcon from './components/Svg/HeartIcon';
 import CharacterIcon from './components/Svg/CharacterIcon';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import AppDataContext from './components/Context/FavouritesContext';
+import AppDataContext from './context/AppDataContext';
 
 const RootStack = createBottomTabNavigator<ScreenStackList>();
 

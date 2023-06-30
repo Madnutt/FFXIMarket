@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { StyleContext } from './Context/StyleContext';
+import { StyleContext } from '../context/StyleContext';
 import { View } from 'react-native';
 
 function Divider(): JSX.Element {

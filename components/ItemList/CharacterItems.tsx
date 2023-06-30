@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { Dimensions, Image, View } from 'react-native';
-import { StyleContext } from '../Context/StyleContext';
+import { StyleContext } from '../../context/StyleContext';
 import { ItemData, getItemsData } from '../../utils/ffxivapiData';
 
 type Props = {

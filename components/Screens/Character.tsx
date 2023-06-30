@@ -1,9 +1,9 @@
 import { ScrollView, Text } from 'react-native';
 import CharacterView from '../Character/CharacterView';
 import { useContext } from 'react';
-import { ScreenStackList, StyleContext } from '../Context/StyleContext';
+import { ScreenStackList, StyleContext } from '../../context/StyleContext';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import AppDataContext from '../Context/FavouritesContext';
+import AppDataContext from '../../context/AppDataContext';
 
 type Props = NativeStackScreenProps<ScreenStackList, 'Character'>;
 

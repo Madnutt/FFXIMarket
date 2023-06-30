@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { Dimensions, View } from 'react-native';
-import { StyleContext } from '../Context/StyleContext';
+import { StyleContext } from '../../context/StyleContext';
 import IconLoader from '../Loaders/IconLoader';
 
 type Props = {

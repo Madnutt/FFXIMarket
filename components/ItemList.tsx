@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
-import { StyleContext } from './Context/StyleContext';
+import { StyleContext } from '../context/StyleContext';
 import Divider from './Divider';
 import ItemSearchLoading from './ItemList/ItemSearchLoading';
 import { searchItem } from '../utils/ffxivapiData';
 import HeartIcon from './Svg/HeartIcon';
 import SingleItemResult from './ItemList/SingleItemResult';
-import AppDataContext from './Context/FavouritesContext';
+import AppDataContext from '../context/AppDataContext';
 
 interface Props {
     searchString: string;

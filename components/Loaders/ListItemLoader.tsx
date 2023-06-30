@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import ContentLoader, { Rect } from 'react-content-loader/native';
-import { StyleContext } from '../Context/StyleContext';
+import { StyleContext } from '../../context/StyleContext';
 
 function ListItemLoader(): JSX.Element {
     const styleContext = useContext(StyleContext);

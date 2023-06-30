@@ -3,7 +3,7 @@ import SingleItemResult from './SingleItemResult';
 import TrashIcon from '../Svg/TrashIcon';
 import { useState, useContext } from 'react';
 import PriceGraph from './PriceGraph';
-import AppDataContext from '../Context/FavouritesContext';
+import AppDataContext from '../../context/AppDataContext';
 
 interface Props {
     iconUrl: string;

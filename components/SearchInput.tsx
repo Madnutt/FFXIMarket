@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { TextInput, View } from 'react-native';
-import { StyleContext } from './Context/StyleContext';
+import { StyleContext } from '../context/StyleContext';
 import { Picker } from '@react-native-picker/picker';
 import SpyGlassIcon from './Svg/SpyGlassIcon';
 import { SearchTypes } from './Screens/Search';
